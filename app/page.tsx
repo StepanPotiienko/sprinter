@@ -1,22 +1,47 @@
 "use client"
 
+import { useState } from "react";
 import './styles/page.css'
 
 const AddHabitForm = () => {
-  function AddNewHabit() {
-    // TODO
-    throw new Error("Not implemented.")
+  const [habitNames, setHabitNames] = useState<string[]>([])
+  const [currentHabit, setCurrentHabit] = useState("")
+
+  function AddNewHabit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (!currentHabit.trim()) {
+      return
+    }
+    
+    console.log(`Adding new habit: ${currentHabit}`)
+    setHabitNames(prev => [...prev, currentHabit])
+    setCurrentHabit("")
+    console.log(habitNames)
   }
 
   return (
-    <div className="flex flex-col gap-3 w-1/4 text-center bg-gradient-to-br from-yellow-400 to-red-500 rounded-4xl p-3" id="new-habit-form">
-      <label htmlFor="add-habit">Add new habit:</label>
-      <input id="add-habit" placeholder="Enter the name of the habit: "/>
-      <button type="submit" value={"Submit"} onSubmit={() => AddNewHabit()} className="cursor-pointer hover:underline">Submit</button>
+    <div className="w-1/4 text-center bg-gradient-to-br from-yellow-400 to-red-500 rounded-4xl p-3" id="new-habit-form">
+      <form onSubmit={AddNewHabit} className="flex flex-col gap-3">
+        <label htmlFor="add-habit">Add new habit:</label>
+        <input 
+          id="add-habit"
+          name="add-habit"
+          value={currentHabit}
+          onChange={(e) => setCurrentHabit(e.target.value)}
+          placeholder="Enter the name of the habit: "
+        />
+        <button type="submit" className="cursor-pointer hover:underline">
+          Submit
+        </button>
+      </form>
+      <ul className="mt-4">
+        {habitNames.map((habit, index) => (
+          <li key={index}>{habit}</li>
+        ))}
+      </ul>
     </div>
   )
 }
-
 
 export default function Home() {
   return (
