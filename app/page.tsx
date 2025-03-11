@@ -3,6 +3,9 @@
 import { useState } from "react";
 import './styles/page.css'
 
+import { NotesList } from "./components/notes"; 
+
+
 const AddHabitForm = () => {
   const [habitNames, setHabitNames] = useState<string[]>([])
   const [currentHabit, setCurrentHabit] = useState("")
@@ -34,22 +37,21 @@ const AddHabitForm = () => {
           Submit
         </button>
       </form>
-      <ul className="mt-4">
-        {habitNames.map((habit, index) => (
-          <li key={index}>{habit}</li>
-        ))}
-      </ul>
     </div>
   )
 }
 
 export default function Home() {
   return (
-    <div className='w-[100vw] h-[80vh] flex justify-center items-center flex-col'>
+    <div className='w-full h-full flex justify-center items-center flex-col'>
       <h1 className="text-4xl" style={{textShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)"}}>Sprinter</h1>
       <h2 className='text-xl'>Habit tracker made easy!</h2>
       <div className='w-[100vw] h-[30vh] flex justify-center align-middle items-center'>
         <AddHabitForm />
+      </div>
+      <hr className="w-3/4" />
+      <div>
+        <NotesList />
       </div>
     </div>
   );
