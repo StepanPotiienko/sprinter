@@ -3,7 +3,7 @@
 import { useState } from "react";
 import './styles/page.css'
 
-import { NotesList } from "./components/notes"; 
+import { NotesGrid } from './components/notes'
 
 
 const AddHabitForm = () => {
@@ -51,7 +51,7 @@ export default function Home() {
       </div>
       <hr className="w-3/4" />
       <div>
-        <NotesList />
+        <NotesGrid />
       </div>
     </div>
   );
